@@ -100,7 +100,5 @@ describe('CatsExtractorService', () => {
         expect(result).toEqual(expectedCatList);
       }));
     });
-
-
   });
 });

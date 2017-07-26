@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {CatsList} from './models/person.model';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+
+  public catsList: CatsList = {Male: ['Garfield', 'Jim', 'Max', 'Tom'], Female: ['Garfield', 'Simba', 'Tabby']};
+
+  constructor() {
+
+  }
 }
