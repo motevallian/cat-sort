@@ -1,11 +1,18 @@
 import { TestBed, inject } from '@angular/core/testing';
+import {HttpModule, XHRBackend, ResponseOptions, Response} from '@angular/http';
+import {MockBackend, MockConnection} from '@angular/http/testing';
 
 import { LoadPeopleService } from './load-people.service';
+import {Person} from '../models/person.model';
 
 describe('LoadPeopleService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [LoadPeopleService]
+      imports: [HttpModule],
+      providers: [
+        LoadPeopleService,
+        { provide: XHRBackend, useClass: MockBackend }
+      ]
     });
   });
 
@@ -14,7 +21,13 @@ describe('LoadPeopleService', () => {
   }));
 
   describe('retrievePeople()', () => {
-    it('should retrieve the correct response from the server', inject([LoadPeopleService], (service: LoadPeopleService) => {
+    beforeEach(() => {
+
+    });
+
+    it('should retrieve the correct response from the server',
+      inject([LoadPeopleService, XHRBackend],
+        (service, mockBackend) => {
       const expectedPeople = [{
         name: 'Bob',
         gender: 'Male',
@@ -30,8 +43,17 @@ describe('LoadPeopleService', () => {
           }
         ]
       }];
-      const resultPeople = service.retrievePeople();
-      expect(resultPeople).toEqual(expectedPeople);
+
+      mockBackend.connections.subscribe((conn: MockConnection) => {
+        conn.mockRespond(new Response(new ResponseOptions({
+          body: JSON.stringify(expectedPeople)
+        })));
+      });
+
+      service.retrievePeople().subscribe((resultPeople: Person[]) => {
+        expect(resultPeople).toEqual(expectedPeople);
+      });
+
     }));
   });
 
