@@ -18,18 +18,16 @@ export class AppComponent implements OnInit {
   public maleCatsList: Observable<string[]>;
   public femaleCatsList: Observable<string[]>;
 
-  constructor(private loadPeople: LoadPeopleService, private catExtraxtor: CatsExtractorService) {
+  constructor(private loadPeople: LoadPeopleService,
+              private catExtractor: CatsExtractorService) {
 
   }
 
   ngOnInit(): void {
     const people$ = this.loadPeople.retrievePeople()
       .map((people: Person[]) => {
-        return this.catExtraxtor.extractCats(people);
-      }).share()
-      .do((x) => {
-          console.log('value retrieved', x);
-        });
+        return this.catExtractor.extractCats(people);
+      }).share(); // This step is very important to ensure Male and Female subscriptions in below do not cause TWO API calls.
 
     this.maleCatsList = people$.map((catsList: CatsList) => catsList.Male);
     this.femaleCatsList = people$.map((catsList: CatsList) => catsList.Female);
