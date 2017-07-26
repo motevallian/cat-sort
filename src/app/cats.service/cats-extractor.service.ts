@@ -13,7 +13,18 @@ export class CatsExtractorService {
     const catObjs = _(people)
       .flatMap(this.extractPersonCats.bind(this))
       .value(); // Now we have an array [{ gender, catName}] for each person, Let us flatten them into a single array.
-    return this.collectcatObjsArray(catObjs);
+    const catsList = this.collectcatObjsArray(catObjs);
+    return this.sortCatNames(catsList);
+  }
+
+  /**
+   * Sorting cat names in each section.
+   */
+  private sortCatNames(catsList: CatsList): CatsList {
+   return {
+     Male: _.sortBy(catsList.Male),
+     Female: _.sortBy(catsList.Female),
+   };
   }
 
   /**
