@@ -26,7 +26,7 @@ describe('CatsExtractorService', () => {
           {name: 'Bob', gender: 'Male', age: 23, pets: [{name: 'Fido', type: 'Dog'}]},
           {name: 'Jennifer', gender: 'Female', age: 18, pets: [{name: 'Garfield', type: 'Cat'}]}
         ];
-        expectedCatList = { Male: [], Female: ['Garfield'] };
+        expectedCatList = {Male: [], Female: ['Garfield']};
 
         result = service.extractCats(people);
       }));
@@ -47,7 +47,7 @@ describe('CatsExtractorService', () => {
           {name: 'Fred', gender: 'Male', age: 40, pets: [{name: 'Tom', type: 'Cat'}]},
           {name: 'Jennifer', gender: 'Female', age: 18, pets: [{name: 'Garfield', type: 'Cat'}]}
         ];
-        const expectedCatList: CatsList = { Male: ['Tom'], Female: ['Garfield'] };
+        const expectedCatList: CatsList = {Male: ['Tom'], Female: ['Garfield']};
 
         const result = service.extractCats(people);
         expect(result).toEqual(expectedCatList);
@@ -60,7 +60,7 @@ describe('CatsExtractorService', () => {
         {name: 'Fred', gender: 'Male', age: 40, pets: null},
         {name: 'Jennifer', gender: 'Female', age: 18, pets: [{name: 'Garfield', type: 'Cat'}]}
       ];
-      const expectedCatList: CatsList = { Male: [], Female: ['Garfield'] };
+      const expectedCatList: CatsList = {Male: [], Female: ['Garfield']};
 
       const result = service.extractCats(people);
       expect(result).toEqual(expectedCatList);
@@ -72,10 +72,32 @@ describe('CatsExtractorService', () => {
           {name: 'Fred', gender: 'Male', age: 40, pets: [{name: 'Tom', type: 'Cat'}, {name: 'Max', type: 'Cat'}]},
           {name: 'Jennifer', gender: 'Female', age: 18, pets: [{name: 'Garfield', type: 'Cat'}]}
         ];
-        const expectedCatList: CatsList = { Male: ['Tom', 'Max'], Female: ['Garfield'] };
 
         const result = service.extractCats(people);
-        expect(result.Male).toEqual(expectedCatList.Male);
+        expect(_.includes(result.Male, 'Tom')).toBe(true);
+        expect(_.includes(result.Male, 'Max')).toBe(true);
+      }));
+    });
+
+    describe('given multiple Male\'s and Female\'s cats', () => {
+      it('should sort them alphabetically', inject([CatsExtractorService], (service) => {
+        const people: Person[] = [
+          {name: 'Bob', gender: 'Male', age: 23, pets: [{name: 'Garfield', type: 'Cat'}]},
+          {
+            name: 'Fred', gender: 'Male', age: 40, pets: [
+            {name: 'Tom', type: 'Cat'},
+            {name: 'Max', type: 'Cat'},
+            {name: 'Jim', type: 'Cat'},
+          ]},
+          {name: 'Jennifer', gender: 'Female', age: 18, pets: [{name: 'Garfield', type: 'Cat'}]},
+          {name: 'Samantha', gender: 'Female', age: 64, pets: [{name: 'Tabby', type: 'Cat'}]},
+          {name: 'Alice', gender: 'Female', age: 64, pets: [{name: 'Simba', type: 'Cat'}]}
+        ];
+
+        const expectedCatList: CatsList = {Male: ['Garfield', 'Jim', 'Max', 'Tom'], Female: ['Garfield', 'Simba', 'Tabby']};
+
+        const result = service.extractCats(people);
+        expect(result).toEqual(expectedCatList);
       }));
     });
 
