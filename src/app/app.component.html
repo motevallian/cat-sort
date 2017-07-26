@@ -8,7 +8,7 @@
   <li>
     <h2>Male</h2>
     <ul>
-      <li *ngFor="let catName of catsList.Male">
+      <li *ngFor="let catName of maleCatsList | async">
         {{catName}}
       </li>
     </ul>
@@ -16,7 +16,7 @@
   <li>
     <h2>Female</h2>
     <ul>
-      <li *ngFor="let catName of catsList.Female">
+      <li *ngFor="let catName of femaleCatsList | async">
         {{catName}}
       </li>
     </ul>
