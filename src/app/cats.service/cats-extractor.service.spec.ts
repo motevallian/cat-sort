@@ -19,18 +19,10 @@ describe('CatsExtractorService', () => {
       it('should return the cat name under Female section of the result',
         inject([CatsExtractorService], (service: CatsExtractorService) => {
 
-          const people: Person[] = [{
-              name: 'Bob',
-              gender: 'Male',
-              age: 23,
-              pets: [ {name: 'Fido', type: 'Dog'} ]
-            },
-            {
-              name: 'Jennifer',
-              gender: 'Female',
-              age: 18,
-              pets: [ {name: 'Garfield', type: 'Cat'} ]
-            }];
+          const people: Person[] = [
+            {name: 'Bob', gender: 'Male', age: 23, pets: [{name: 'Fido', type: 'Dog'}]},
+            {name: 'Jennifer', gender: 'Female', age: 18, pets: [{name: 'Garfield', type: 'Cat'}]}
+          ];
           const expectedCatList: CatsList = {
             Male: [],
             Female: ['Garfield']
@@ -45,18 +37,10 @@ describe('CatsExtractorService', () => {
       it('should return the cat name under Female section of the result',
         inject([CatsExtractorService], (service: CatsExtractorService) => {
 
-          const people: Person[] = [{
-            name: 'Fred',
-            gender: 'Male',
-            age: 40,
-            pets: [ {name: 'Tom', type: 'Cat'} ]
-          },
-            {
-              name: 'Jennifer',
-              gender: 'Female',
-              age: 18,
-              pets: [ {name: 'Garfield', type: 'Cat'} ]
-            }];
+          const people: Person[] = [
+            {name: 'Fred', gender: 'Male', age: 40, pets: [{name: 'Tom', type: 'Cat'}]},
+            {name: 'Jennifer', gender: 'Female', age: 18, pets: [{name: 'Garfield', type: 'Cat'}]}
+          ];
           const expectedCatList: CatsList = {
             Male: ['Tom'],
             Female: ['Garfield']
@@ -66,5 +50,29 @@ describe('CatsExtractorService', () => {
           expect(result).toEqual(expectedCatList);
         }));
     });
+
+    it('should ignore a person with no pets, i.e. pets == null',
+      inject([CatsExtractorService], (service: CatsExtractorService) => {
+
+        const people: Person[] = [{
+          name: 'Fred',
+          gender: 'Male',
+          age: 40,
+          pets: null
+        },
+          {
+            name: 'Jennifer',
+            gender: 'Female',
+            age: 18,
+            pets: [{name: 'Garfield', type: 'Cat'}]
+          }];
+        const expectedCatList: CatsList = {
+          Male: [],
+          Female: ['Garfield']
+        };
+
+        const result = service.extractCats(people);
+        expect(result).toEqual(expectedCatList);
+      }));
   });
 });
