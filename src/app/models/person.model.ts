@@ -9,3 +9,8 @@ export class Pet {
   public name: string;
   public type: string;
 }
+
+export class CatsList {
+  public Male: string[];
+  public Female: string[];
+}
