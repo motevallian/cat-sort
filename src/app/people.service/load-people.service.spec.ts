@@ -28,7 +28,7 @@ describe('LoadPeopleService', () => {
     it('should retrieve the correct response from the server',
       inject([LoadPeopleService, XHRBackend],
         (service, mockBackend) => {
-      const expectedPeople = [{
+      const expectedPeople: Person[] = [{
         name: 'Bob',
         gender: 'Male',
         age: 23,
