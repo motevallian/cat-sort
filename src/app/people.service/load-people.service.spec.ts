@@ -52,6 +52,8 @@ describe('LoadPeopleService', () => {
 
       service.retrievePeople().subscribe((resultPeople: Person[]) => {
         expect(resultPeople).toEqual(expectedPeople);
+      }, () => {
+        fail('An unexpected error occurred.');
       });
 
     }));
