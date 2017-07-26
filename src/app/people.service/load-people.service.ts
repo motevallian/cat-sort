@@ -5,4 +5,7 @@ export class LoadPeopleService {
 
   constructor() { }
 
+  retrievePeople() {
+    return null;
+  }
 }
