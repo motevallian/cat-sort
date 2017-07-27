@@ -9,10 +9,10 @@ import {CatsList} from '../models/person.model';
 export class GenderCatListComponent implements OnInit {
 
   @Input()
-  gender: string;
+  public gender: string;
 
   @Input()
-  catsList: string[];
+  public catsList: string[];
 
   constructor() { }
 
