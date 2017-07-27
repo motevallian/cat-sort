@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
-app-cats-list {
+.heading {
+  text-align: center;
+  font-size: 24px;
+}
+
+app-cats-list, .heading {
   font-family: 'Montserrat', sans-serif;
 }
