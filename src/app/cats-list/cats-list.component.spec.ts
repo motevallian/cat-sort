@@ -7,7 +7,7 @@ import {CatsExtractorService} from '../cats.service/cats-extractor.service';
 import {Subject} from 'rxjs/Subject';
 import {By} from '@angular/platform-browser';
 
-fdescribe('CatsListComponent', () => {
+describe('CatsListComponent', () => {
   let component: CatsListComponent;
   let fixture: ComponentFixture<CatsListComponent>;
 
