@@ -1,0 +1,6 @@
+<h2 class="genderHeader">{{gender}}</h2>
+<ul *ngIf="catsList && catsList.length > 0" class="catsList">
+  <li class="catItem" *ngFor="let catName of catsList">
+    {{catName}}
+  </li>
+</ul>
