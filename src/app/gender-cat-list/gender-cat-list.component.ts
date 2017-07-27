@@ -4,7 +4,7 @@ import {CatsList} from '../models/person.model';
 @Component({
   selector: 'app-gender-cat-list',
   templateUrl: './gender-cat-list.component.html',
-  styleUrls: ['./gender-cat-list.component.css']
+  styleUrls: ['./gender-cat-list.component.scss']
 })
 export class GenderCatListComponent implements OnInit {
 

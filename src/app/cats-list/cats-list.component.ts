@@ -11,7 +11,7 @@ import {CatsExtractorService} from '../cats.service/cats-extractor.service';
 @Component({
   selector: 'app-cats-list',
   templateUrl: './cats-list.component.html',
-  styleUrls: ['./cats-list.component.css']
+  styleUrls: ['./cats-list.component.scss']
 })
 export class CatsListComponent implements OnInit {
   // Creating two streams of cat names, 1 for Female owners and one for Male owners.
