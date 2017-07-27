@@ -1,7 +1,8 @@
 # CatSort
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.4.
-It is highly recommended you install Agnular CLI globally and then follow the below commands to run the app.
+It is highly recommended you install Agnular CLI globally, i.e.:
+- `npm install -g @angular/cli`
 
 ## Development server
 
